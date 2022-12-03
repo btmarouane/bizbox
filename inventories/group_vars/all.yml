@@ -211,14 +211,34 @@ traefik_error_pages_middleware: "{{ 'error-pages-middleware,'
                                  if traefik_error_pages_enabled and traefik_error_pages_role_enabled
                                  else '' }}"
 
-traefik_default_middleware_default: "{{ traefik_error_pages_middleware + 'globalHeaders@file,secureHeaders@file'
+traefik_default_middleware_default: "{{ traefik_error_pages_middleware + 'globalHeaders@file,secureHeaders@file,custom-security-headers'
                                         + (',gzip'
                                           if (lookup('vars', traefik_role_var + '_traefik_gzip_enabled', default=lookup('vars', role_name + '_traefik_gzip_enabled', default=true)))
                                           else '')
                                         + (',hsts@file'
                                           if (traefik.hsts)
                                           else '') }}"
-traefik_default_middleware_custom: ""
+traefik_default_middleware_custom:
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.accesscontrolallowmethods": "GET,OPTIONS,PUT" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.accesscontrolallowmethods": "GET,OPTIONS,PUT" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.accesscontrolmaxage": "100" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.addvaryheader": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.hostsproxyheaders": "X-Forwarded-Host" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.sslredirect": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.sslproxyheaders.X-Forwarded-Proto": "https" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.stsseconds": "63072000" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.stsincludesubdomains": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.stspreload": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.forcestsheader": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.framedeny": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.contenttypenosniff": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.browserxssfilter": "true" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.referrerpolicy": "same-origin" }'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.featurepolicy": "camera "none"; geolocation "none"; microphone "none"; payment "none"; usb "none"; vr "none";"}'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.customresponseheaders.X-Robots-Tag": "none,noarchive,nosnippet,notranslate,noimageindex"}'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.accesscontrolalloworiginlist": "{{ "https://" + user.domain }}"}'
+  - '{ "traefik.http.middlewares.custom-security-headers.headers.contentsecuritypolicy": "script-src "self""}'
+
 traefik_default_middleware: "{{ traefik_default_middleware_default
                                 + (',' + traefik_default_middleware_custom
                                   if (not traefik_default_middleware_custom.startswith(',') and traefik_default_middleware_custom | length > 0)
