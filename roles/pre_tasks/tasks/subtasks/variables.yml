@@ -37,7 +37,8 @@
   when: localhost_inventory_file.stat.exists
 
 - name: debug
-  msg: "{{domain}}"
+  ansible.builtin.debug:
+    msg: "{{domain}}"
 
 - name: Set user domain
   set_fact:
