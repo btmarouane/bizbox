@@ -38,5 +38,5 @@
 
 - name: Update config file
   template:
-    src: /srv/git/saltbox/config.yaml.j2
-    dest: /srv/git/saltbox/config.yaml
+    src: /srv/git/saltbox/config.yml.j2
+    dest: /srv/git/saltbox/config.yml
