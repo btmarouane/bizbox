@@ -1,4 +1,10 @@
 ---
+user:
+  name: seed
+  pass: password123
+  domain: testsaltbox.ml
+  email: your@email.com
+  ssh_key:
 cloudflare:
   email:
   api:
