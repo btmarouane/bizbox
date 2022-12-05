@@ -1,10 +1,4 @@
 ---
-user:
-  name: seed
-  pass: password123
-  domain: "{{domain}}"
-  email: your@email.com
-  ssh_key:
 cloudflare:
   email:
   api:
