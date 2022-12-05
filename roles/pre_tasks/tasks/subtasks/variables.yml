@@ -36,9 +36,6 @@
   ansible.builtin.include_vars: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
   when: localhost_inventory_file.stat.exists
 
-- name: Import domain.conf variable
-  ansible.builtin.include_vars: "/srv/git/saltbox/domain.conf"
-
 - name: Update config file
   template:
     src: /srv/git/saltbox/config.yaml.j2

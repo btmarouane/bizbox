@@ -6,6 +6,7 @@
     - ['adv_settings.yml', 'defaults/adv_settings.yml.default']
     - ['backup_config.yml', 'defaults/backup_config.yml.default']
     - ['providers.yml', 'defaults/providers.yml.default']
+    - ['config.yml', 'defaults/config.yml.j2.default']
   roles:
     - { role: settings, tags: ['settings'] }
     - { role: pre_tasks, tags: ['pre_tasks'] }
