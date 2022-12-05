@@ -36,6 +36,10 @@
   ansible.builtin.include_vars: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
   when: localhost_inventory_file.stat.exists
 
+- name: Set fact | user domain
+  set_fact:
+    domain: "{{lookup('vars', domain)}}"
+
 - name: debug
   ansible.builtin.debug:
     msg: "{{domain}}"
