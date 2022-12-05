@@ -92,7 +92,7 @@ use_nvidia: "{{ gpu.nvidia }}"
 
 server_root_path: "/"
 
-server_appdata_path: "{{ server_root_path | regex_replace('\\/$', '') + '/opt' }}"
+server_appdata_path: "{{ server_root_path | regex_replace('\\/$', '') + '/opt/' + user.domain }}"
 
 ################################
 # Paths
