@@ -50,7 +50,6 @@
       - "backup_config.yml"
       - "providers.yml"
       - "hetzner_nfs.yml"
-      - "config.yml"
 
 - name: Start | Initialize vars with empty lists
   ansible.builtin.set_fact:
