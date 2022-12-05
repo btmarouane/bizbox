@@ -15,6 +15,10 @@
   ansible.builtin.import_tasks: "subtasks/git.yml"
   tags: always
 
+- name: Extra Variables Tasks
+  ansible.builtin.import_tasks: "subtasks/extra_variables.yml"
+  tags: always
+
 - name: Variables Tasks
   ansible.builtin.import_tasks: "subtasks/variables.yml"
   tags: always

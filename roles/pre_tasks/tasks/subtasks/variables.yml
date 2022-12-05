@@ -36,8 +36,3 @@
   ansible.builtin.include_vars: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
   when: localhost_inventory_file.stat.exists
 
-- name: Set user domain
-  set_fact:
-    user: "{{ user | combine( { 'domain': domain } ) }}"
-  when: domain is defined
-
