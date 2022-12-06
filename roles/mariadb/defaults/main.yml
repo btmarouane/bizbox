@@ -11,13 +11,13 @@
 # Basics
 ################################
 
-mariadb_name: mariadb
+mariadb_name: "{{ user.domain | replace('.','-')+'-mariadb' }}"
 
 ################################
 # Paths
 ################################
 
-mariadb_paths_folder: "{{ mariadb_name }}"
+mariadb_paths_folder: mariadb
 mariadb_paths_location: "{{ server_appdata_path }}/{{ mariadb_paths_folder }}"
 mariadb_paths_folders_list:
   - "{{ mariadb_paths_location }}"
