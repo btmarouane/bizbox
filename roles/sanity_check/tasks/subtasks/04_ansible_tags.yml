@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Sanity Check | Ansible Tags                   #
+# Title:         Bizbox: Sanity Check | Ansible Tags                   #
 # Author(s):     desimaniac, EnorMOZ                                    #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -12,7 +12,7 @@
   register: available_ansible_tags
   changed_when: false
   when: (not continuous_integration)
-        and ('saltbox_mod' not in playbook_dir)
+        and ('bizbox_mod' not in playbook_dir)
         and ('sandbox' not in playbook_dir)
 
 - name: Ansible Tags | Ensure valid Ansible tag(s) were provided
@@ -25,5 +25,5 @@
     quiet: true
   with_items: "{{ ansible_run_tags }}"
   when: (not continuous_integration)
-        and ('saltbox_mod' not in playbook_dir)
+        and ('bizbox_mod' not in playbook_dir)
         and ('sandbox' not in playbook_dir)

@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Shell | Bash Tasks                            #
+# Title:         Bizbox: Shell | Bash Tasks                            #
 # Author(s):     desimaniac                                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -10,7 +10,7 @@
 - name: Bash | Add items to '{{ shell_bash_bashrc_path }}'
   ansible.builtin.blockinfile:
     path: "{{ shell_bash_bashrc_path }}"
-    marker: "### SALTBOX MANAGED BLOCK - {mark} ###"
+    marker: "### BIZBOX MANAGED BLOCK - {mark} ###"
     block: "{{ shell_bash_bashrc_block_content }}"
     state: present
     create: false
@@ -21,7 +21,7 @@
 - name: Bash | Add custom items to '{{ shell_bash_bashrc_path }}'
   ansible.builtin.blockinfile:
     path: "{{ shell_bash_bashrc_path }}"
-    marker: "### SALTBOX MANAGED BLOCK CUSTOM - {mark} ###"
+    marker: "### BIZBOX MANAGED BLOCK CUSTOM - {mark} ###"
     block: "{{ shell_bash_bashrc_block_custom }}"
     state: present
     create: false

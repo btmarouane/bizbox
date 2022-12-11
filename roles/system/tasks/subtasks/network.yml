@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: System | Network Tasks                        #
+# Title:         Bizbox: System | Network Tasks                        #
 # Author(s):     desimaniac, salty                                      #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -50,7 +50,7 @@
         path: "/etc/rc.local"
         state: present
         create: false
-        marker: "### {mark} SALTBOX MANAGED BLOCK ###"
+        marker: "### {mark} BIZBOX MANAGED BLOCK ###"
         block: |
           /sbin/ifconfig {{ ansible_default_ipv4.interface }} txqueuelen 10000
           ethtool -G {{ ansible_default_ipv4.interface }} rx 4096 tx 4096

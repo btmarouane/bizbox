@@ -1,28 +1,28 @@
 #########################################################################
-# Title:         Saltbox: Cloudflare | Subdomains | Remove Subdomain    #
+# Title:         Bizbox: Cloudflare | Subdomains | Remove Subdomain    #
 # Author(s):     desimaniac, salty                                      #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
 #########################################################################
 ---
-- name: "Subdomains | Remove Subdomain | Cloudflare: Remove 'saltbox' A record from '{{ fld.stdout }}'"
+- name: "Subdomains | Remove Subdomain | Cloudflare: Remove 'bizbox' A record from '{{ fld.stdout }}'"
   community.general.cloudflare_dns:
     account_api_token: "{{ cloudflare.api }}"
     account_email: "{{ cloudflare.email }}"
     zone: "{{ fld.stdout }}"
     state: absent
     type: A
-    record: "saltbox"
+    record: "bizbox"
   when: dns.ipv4
 
-- name: "Subdomains | Remove Subdomain | Cloudflare: Remove 'saltbox' AAAA record from '{{ fld.stdout }}'"
+- name: "Subdomains | Remove Subdomain | Cloudflare: Remove 'bizbox' AAAA record from '{{ fld.stdout }}'"
   community.general.cloudflare_dns:
     account_api_token: "{{ cloudflare.api }}"
     account_email: "{{ cloudflare.email }}"
     zone: "{{ fld.stdout }}"
     state: absent
     type: AAAA
-    record: "saltbox"
+    record: "bizbox"
   when: dns.ipv6

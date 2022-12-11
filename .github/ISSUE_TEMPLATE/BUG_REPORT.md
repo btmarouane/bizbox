@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help us improve Saltbox
+about: Create a report to help us improve Bizbox
 labels: Bug
 ---
 

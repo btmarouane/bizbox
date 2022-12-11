@@ -2,7 +2,7 @@
 #########################################################################
 # Title:         Plex Autoscan URL Script                               #
 # Author(s):     desimaniac                                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # Description:   Prints out the Plex Autoscan URL.                      #
 # --                                                                    #
 #########################################################################
@@ -23,8 +23,8 @@ readonly BWHITE="\033[1;37m"
 readonly BBLUE="\033[1;34m"
 
 # Config files
-readonly SB_ANSIBLE="/srv/git/saltbox/ansible.cfg"
-readonly SB_ACCOUNTS="/srv/git/saltbox/accounts.yml"
+readonly SB_ANSIBLE="/srv/git/bizbox/ansible.cfg"
+readonly SB_ACCOUNTS="/srv/git/bizbox/accounts.yml"
 readonly PAS_CONFIG="/opt/plex_autoscan/config/config.json"
 
 # Boolean vars
@@ -47,7 +47,7 @@ echo -e "
 ${GREEN}┌───────────────────────────────────────────────────────────────────────────────────┐
 ${GREEN}│ Title:             Plex Autoscan URL Script                                       │
 ${GREEN}│ Author(s):         desimaniac                                                     │
-${GREEN}│ URL:               https://github.com/saltyorg/Saltbox                            │
+${GREEN}│ URL:               https://github.com/jeremiahg7/Bizbox                            │
 ${GREEN}│ Description:       Prints out the Plex Autoscan URL.                              │
 ${GREEN}├───────────────────────────────────────────────────────────────────────────────────┤
 ${GREEN}│                        GNU General Public License v3.0                            │
@@ -95,7 +95,7 @@ function build_url() {
     SERVER_PORT=$(cat ${PAS_CONFIG} | jq -r .SERVER_PORT)
     SERVER_PASS=$(cat ${PAS_CONFIG} | jq -r .SERVER_PASS)
 
-    # Get variables from Saltbox account settings
+    # Get variables from Bizbox account settings
     DOMAIN=$(yyq e '.user.domain' ${SB_ACCOUNTS} )
 
     # If SERVER_IP is 0.0.0.0, assign public IP address to REAL_IP.
@@ -109,7 +109,7 @@ function build_url() {
     declare -a SUBDOMAINS=(
         "plex.${DOMAIN}"
         "mediabox.${DOMAIN}"
-        "saltbox.${DOMAIN}"
+        "bizbox.${DOMAIN}"
         "${REAL_IP}"
     )
 

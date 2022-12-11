@@ -44,7 +44,7 @@ jobs:
 
     - uses: BobAnkh/add-contributors@master
       with:
-        REPO_NAME: 'saltyorg/Saltbox'
+        REPO_NAME: 'jeremiahg7/Bizbox'
         CONTRIBUTOR: '### Contributors'
         COLUMN_PER_ROW: '6'
         ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -61,7 +61,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: set-matrix
-        run: echo "matrix={\"roles\":[$(awk '/# Core/{flag=1;next}/# Apps End/{flag=0}flag' saltbox.yml | awk '!/#/' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | awk -F',' '{ for( i=1; i<=NF; i++ ) print $i }' | awk '{ gsub(/ /,""); print }'| sort -u | awk -vORS=, '{ print $1 }' | sed 's/,$/\n/' | sed "s/.\(roles\|common\|hetzner\|kernel\|motd\|mounts\|mounts_override\|nvidia\|preinstall\|rclone\|scripts\|shell\|system\|traefik\|traefik_reset_certs\|user\|cloudflare\|plex-db\).,//g")]}" >> $GITHUB_OUTPUT
+        run: echo "matrix={\"roles\":[$(awk '/# Core/{flag=1;next}/# Apps End/{flag=0}flag' bizbox.yml | awk '!/#/' | awk -F'[][]' '{print $2}' | tr '\n' ',' | sed 's/,*$//' | awk -F',' '{ for( i=1; i<=NF; i++ ) print $i }' | awk '{ gsub(/ /,""); print }'| sort -u | awk -vORS=, '{ print $1 }' | sed 's/,$/\n/' | sed "s/.\(roles\|common\|hetzner\|kernel\|motd\|mounts\|mounts_override\|nvidia\|preinstall\|rclone\|scripts\|shell\|system\|traefik\|traefik_reset_certs\|user\|cloudflare\|plex-db\).,//g")]}" >> $GITHUB_OUTPUT
 
   install:
     name: '${{ matrix.roles }}'
@@ -80,13 +80,13 @@ jobs:
           timeout_minutes: 10
           max_attempts: 3
           shell: bash
-          command: curl https://raw.githubusercontent.com/saltyorg/sb/master/sb_dep.sh --output sb_dep.sh && sudo bash sb_dep.sh -v && ansible --version
+          command: curl https://raw.githubusercontent.com/jeremiahg7/sb/master/sb_dep.sh --output sb_dep.sh && sudo bash sb_dep.sh -v && ansible --version
         
       - name: Create /srv/git
         run: sudo mkdir /srv/git
 
-      - name: Symlink cloned repository to /srv/git/saltbox
-        run: sudo ln -s $GITHUB_WORKSPACE /srv/git/saltbox
+      - name: Symlink cloned repository to /srv/git/bizbox
+        run: sudo ln -s $GITHUB_WORKSPACE /srv/git/bizbox
 
       - name: Chown /srv/git
         run: sudo chown -R runner:runner /srv/git
@@ -101,16 +101,16 @@ jobs:
         run: tree -a
 
       - name: Syntax Check
-        run: sudo ansible-playbook saltbox.yml --syntax-check
+        run: sudo ansible-playbook bizbox.yml --syntax-check
 
-      - name: Install Saltbox Core
+      - name: Install Bizbox Core
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 30
           max_attempts: 3
           shell: bash
-          command: sudo ansible-playbook saltbox.yml --tags "core" --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
-        if: ${{ !(contains(matrix.roles, 'saltbox') || contains(matrix.roles, 'feederbox') || contains(matrix.roles, 'mediabox') || contains(matrix.roles, 'core')) }}
+          command: sudo ansible-playbook bizbox.yml --tags "core" --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
+        if: ${{ !(contains(matrix.roles, 'bizbox') || contains(matrix.roles, 'feederbox') || contains(matrix.roles, 'mediabox') || contains(matrix.roles, 'core')) }}
 
       - name: Install ${{ matrix.roles }}
         uses: nick-fields/retry@v2
@@ -118,7 +118,7 @@ jobs:
           timeout_minutes: 30
           max_attempts: 3
           shell: bash
-          command: sudo ansible-playbook saltbox.yml --tags "${{ matrix.roles }}" --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
+          command: sudo ansible-playbook bizbox.yml --tags "${{ matrix.roles }}" --skip-tags "settings" --extra-vars '{"continuous_integration":true}'
 
   webhook:
     name: 'webhook'

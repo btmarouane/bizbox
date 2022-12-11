@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Rclone - Preinstall Tasks                     #
+# Title:         Bizbox: Rclone - Preinstall Tasks                     #
 # Author(s):     desimaniac                                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -12,9 +12,9 @@
     msg: "Kernel was updated."
   when: (preinstall_kernel_restart is defined) and (preinstall_kernel_restart)
 
-- name: "Preinstall | Saltbox pre-install has completed!"
+- name: "Preinstall | Bizbox pre-install has completed!"
   ansible.builtin.debug:
-    msg: "Saltbox pre-install has completed!"
+    msg: "Bizbox pre-install has completed!"
 
 - name: Preinstall | Tasks for kernel restart
   block:

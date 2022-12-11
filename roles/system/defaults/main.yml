@@ -1,7 +1,7 @@
 ##########################################################################
-# Title:         Saltbox: Settings | Default Variables                   #
+# Title:         Bizbox: Settings | Default Variables                   #
 # Author(s):     desimaniac, salty                                       #
-# URL:           https://github.com/saltyorg/Saltbox                     #
+# URL:           https://github.com/jeremiahg7/Bizbox                     #
 # --                                                                     #
 ##########################################################################
 #                   GNU General Public License v3.0                      #
@@ -21,4 +21,4 @@ system_locale: "en_US.UTF-8"
 system_language: "en_US.UTF-8"
 
 traefik_max_log_size: 10M
-saltbox_max_log_size: 2M
+bizbox_max_log_size: 2M

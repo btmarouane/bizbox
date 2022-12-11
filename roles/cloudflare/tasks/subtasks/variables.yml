@@ -1,15 +1,15 @@
 #########################################################################
-# Title:         Saltbox: Cloudflare | Variables Task                   #
+# Title:         Bizbox: Cloudflare | Variables Task                   #
 # Author(s):     desimaniac, salty                                      #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
 #########################################################################
 ---
-- name: Variables | Set 'saltbox_type' variable
+- name: Variables | Set 'bizbox_type' variable
   ansible.builtin.set_fact:
-    saltbox_type: "{{ 'saltbox' if ('saltbox' in ansible_run_tags)
+    bizbox_type: "{{ 'bizbox' if ('bizbox' in ansible_run_tags)
       else 'mediabox' if ('mediabox' in ansible_run_tags)
       else 'feederbox' if ('feederbox' in ansible_run_tags)
       else '' }}"

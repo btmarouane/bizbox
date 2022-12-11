@@ -1,7 +1,7 @@
 ##########################################################################
-# Title:         Saltbox: Traefik | Default Variables                    #
+# Title:         Bizbox: Traefik | Default Variables                    #
 # Author(s):     RXWatcher, salty                                        #
-# URL:           https://github.com/saltyorg/Saltbox                     #
+# URL:           https://github.com/jeremiahg7/Bizbox                     #
 # --                                                                     #
 ##########################################################################
 #                   GNU General Public License v3.0                      #
@@ -272,7 +272,7 @@ traefik_docker_hosts: "{{ docker_hosts_common
 
 # Labels
 traefik_docker_labels_default:
-  com.github.saltbox.saltbox_managed: "true"
+  com.github.bizbox.bizbox_managed: "true"
   traefik.enable: "true"
   traefik.http.routers.traefik-http.rule: "Host(`{{ traefik_web_subdomain }}.{{ traefik_web_domain }}`)"
   traefik.http.routers.traefik-http.entrypoints: "web"

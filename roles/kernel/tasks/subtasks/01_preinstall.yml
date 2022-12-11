@@ -1,15 +1,15 @@
 #########################################################################
-# Title:         Saltbox: Kernel | Preinstall Tasks                     #
+# Title:         Bizbox: Kernel | Preinstall Tasks                     #
 # Author(s):     desimaniac                                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
 #########################################################################
 ---
-- name: "Preinstall | Saltbox pre-install has started!"
+- name: "Preinstall | Bizbox pre-install has started!"
   ansible.builtin.debug:
-    msg: "Saltbox pre-install has started!"
+    msg: "Bizbox pre-install has started!"
 
 - name: Preinstall | Set default preinstall variables
   ansible.builtin.set_fact:

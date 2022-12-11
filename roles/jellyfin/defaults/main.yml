@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Jellyfin                                      #
+# Title:         Bizbox: Jellyfin                                      #
 # Author(s):     kowalski, desimaniac, owine                            #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -83,7 +83,7 @@ jellyfin_system_settings_default:
   - { xpath: 'EnableFolderView', value: 'true' }
   - { xpath: 'QuickConnectAvailable', value: 'true' }
   - { xpath: 'EnableRemoteAccess', value: 'true' }
-  - { xpath: 'ServerName', value: 'saltbox' }
+  - { xpath: 'ServerName', value: 'bizbox' }
 jellyfin_system_settings_custom: []
 jellyfin_system_settings_list: "{{ lookup('vars', jellyfin_name + '_system_settings_default', default=jellyfin_system_settings_default) + lookup('vars', jellyfin_name + '_system_settings_custom', default=jellyfin_system_settings_custom) }}"
 

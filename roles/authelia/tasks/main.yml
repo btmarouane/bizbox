@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Authelia Role                                 #
+# Title:         Bizbox: Authelia Role                                 #
 # Author(s):     salty                                                  #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -68,7 +68,7 @@
     volumes:
       - "{{ authelia_paths_location }}:/config"
     networks:
-      - name: saltbox
+      - name: bizbox
     purge_networks: yes
     cleanup: yes
     state: started

@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Backup | Saltbox Restore Service              #
+# Title:         Bizbox: Backup | Bizbox Restore Service              #
 # Author(s):     desimaniac, l3uddz                                     #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -94,15 +94,15 @@
   ansible.builtin.debug:
     msg:
       - "The following config file(s) were NOT encrypted successfully: '{{ unencrypted_files_list | trim }}'"
-      - "Saltbox Restore Service will now be skipped."
+      - "Bizbox Restore Service will now be skipped."
   when: (unencrypted_files_list | trim | length > 0)
 
-- name: "Restore Service | Notify | Saltbox Backup: Config files were not encrypted successfully encrypted"
+- name: "Restore Service | Notify | Bizbox Backup: Config files were not encrypted successfully encrypted"
   ansible.builtin.include_role:
     name: notify
   vars:
     message: >
-      Saltbox Backup: The following config file(s) were NOT encrypted successfully: '{{ unencrypted_files_list | trim }}'.
+      Bizbox Backup: The following config file(s) were NOT encrypted successfully: '{{ unencrypted_files_list | trim }}'.
       Restore Service will now be skipped.
   when: (unencrypted_files_list | trim | length > 0)
 
@@ -115,7 +115,7 @@
   block:
 
     - name: Restore Service | Upload encrypted config file(s)
-      ansible.builtin.shell: "curl -F 'file=@{{ item }}' 'https://crs.saltbox.dev/save/{{ restore_service_username }}/{{ (item | basename | splitext)[0] }}'"
+      ansible.builtin.shell: "curl -F 'file=@{{ item }}' 'https://crs.bizbox.dev/save/{{ restore_service_username }}/{{ (item | basename | splitext)[0] }}'"
       args:
         warn: false
       with_fileglob:
@@ -130,15 +130,15 @@
 
     - name: Restore Service | Print error mesage when config file(s) were too large to upload
       ansible.builtin.debug:
-        msg: "The following encrypted config file(s) were too large to upload to the Saltbox Restore Service: '{{ files_too_large_to_upload_list | trim }}'"
+        msg: "The following encrypted config file(s) were too large to upload to the Bizbox Restore Service: '{{ files_too_large_to_upload_list | trim }}'"
       when: (files_too_large_to_upload_list | trim | length > 0)
 
-    - name: "Restore Service | Notify | Saltbox Backup: Config files were too large to upload to the Saltbox Restore Service"
+    - name: "Restore Service | Notify | Bizbox Backup: Config files were too large to upload to the Bizbox Restore Service"
       ansible.builtin.include_role:
         name: notify
       vars:
         message: >
-          Saltbox Backup: The following encrypted config file(s) were too large to upload to the Saltbox Restore Service:
+          Bizbox Backup: The following encrypted config file(s) were too large to upload to the Bizbox Restore Service:
           '{{ files_too_large_to_upload_list | trim }}'
       when: (files_too_large_to_upload_list | trim | length > 0)
 
@@ -150,14 +150,14 @@
 
     - name: Restore Service | Print success message when config file(s) were successfully uploaded
       ansible.builtin.debug:
-        msg: "The following encrypted config file(s) were successfully uploaded to the Saltbox Restore Service: '{{ files_uploaded_list | trim }}'"
+        msg: "The following encrypted config file(s) were successfully uploaded to the Bizbox Restore Service: '{{ files_uploaded_list | trim }}'"
       when: (files_uploaded_list | trim | length > 0)
 
-    - name: "Restore Service | Notify | Saltbox Backup: Config files were successfully encrypted and uploaded to the Saltbox Restore Service"
+    - name: "Restore Service | Notify | Bizbox Backup: Config files were successfully encrypted and uploaded to the Bizbox Restore Service"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Config files uploaded to the Saltbox Restore Service."
+        message: "Bizbox Backup: Config files uploaded to the Bizbox Restore Service."
       when: (files_uploaded_list | trim | length > 0)
 
   when:

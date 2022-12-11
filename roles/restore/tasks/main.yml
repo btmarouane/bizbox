@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Restore Role                                  #
+# Title:         Bizbox: Restore Role                                  #
 # Author(s):     l3uddz, desimaniac                                     #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -35,13 +35,13 @@
 
     - name: "Check if a previous 'localhost.yml' exists"
       ansible.builtin.stat:
-        path: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+        path: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
       register: localhost_yml_default_path
 
     - name: "Backup previous 'localhost.yml' (if it exists)"
       ansible.builtin.copy:
-        src: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
-        dest: "/srv/git/saltbox/inventories/host_vars/localhost.yml.bak"
+        src: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
+        dest: "/srv/git/bizbox/inventories/host_vars/localhost.yml.bak"
         owner: "{{ user.name }}"
         group: "{{ user.name }}"
         mode: "0775"
@@ -50,14 +50,14 @@
 
     - name: "Remove previous 'localhost.yml' (if it exists)"
       ansible.builtin.file:
-        path: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+        path: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
         state: absent
       when: (localhost_yml_default_path.stat.exists)
 
     - name: "Import 'localhost.yml' from '{{ playbook_dir }}'"
       ansible.builtin.copy:
         src: "{{ playbook_dir }}/localhost.yml"
-        dest: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+        dest: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
         owner: "{{ user.name }}"
         group: "{{ user.name }}"
         mode: "0775"
@@ -168,7 +168,7 @@
 
 - name: Finished restoring the backup
   ansible.builtin.debug:
-    msg: Finished restoring the backup. You are now ready to install Saltbox!
+    msg: Finished restoring the backup. You are now ready to install Bizbox!
   when: (unarchive is succeeded)
 
 - name: Settings Role

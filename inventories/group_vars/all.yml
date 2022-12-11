@@ -1,7 +1,7 @@
 ##########################################################################
-# Title:         Saltbox: Global Variables                               #
+# Title:         Bizbox: Global Variables                               #
 # Author(s):     desimaniac, salty                                       #
-# URL:           https://github.com/saltyorg/Saltbox                     #
+# URL:           https://github.com/jeremiahg7/Bizbox                     #
 # --                                                                     #
 ##########################################################################
 #                   GNU General Public License v3.0                      #
@@ -11,7 +11,7 @@
 # Resources
 ################################
 
-resources_tasks_path: "/srv/git/saltbox/resources/tasks"
+resources_tasks_path: "/srv/git/bizbox/resources/tasks"
 
 ################################
 # Continuous Integration
@@ -278,15 +278,15 @@ docker_volumes_common: "{{ docker_volumes_common_folders + docker_volumes_downlo
 
 docker_hosts_common: []
 
-docker_labels_saltbox_tmp:
-  - com.github.saltbox.saltbox_managed: "true"
+docker_labels_bizbox_tmp:
+  - com.github.bizbox.bizbox_managed: "true"
 
 docker_labels_diun_tmp:
   - diun.enable: "true"
 
-docker_labels_saltbox: "{{ docker_labels_saltbox_tmp | combine(docker_labels_diun_tmp)
+docker_labels_bizbox: "{{ docker_labels_bizbox_tmp | combine(docker_labels_diun_tmp)
                         if lookup('vars', role_name + '_diun_enabled', default=true)
-                        else docker_labels_saltbox_tmp }}"
+                        else docker_labels_bizbox_tmp }}"
 
 docker_labels_traefik_main:
   - traefik.enable: "true"
@@ -327,11 +327,11 @@ docker_labels_traefik: "{{ docker_labels_traefik_main | combine(docker_labels_tr
                         if traefik_role_api_enabled
                         else docker_labels_traefik_main }}"
 
-docker_labels_common: "{{ docker_labels_saltbox | combine(docker_labels_traefik)
+docker_labels_common: "{{ docker_labels_bizbox | combine(docker_labels_traefik)
                        if (traefik_role_enabled and reverse_proxy_is_enabled)
-                       else docker_labels_saltbox }}"
+                       else docker_labels_bizbox }}"
 
-docker_networks_name_common: saltbox
+docker_networks_name_common: bizbox
 
 docker_networks_common:
   - name: "{{ docker_networks_name_common }}"
@@ -365,7 +365,7 @@ docker_log_options: "{{ docker_log_options_json
 # Cloudbox Version Manager
 ################################
 
-cvm: https://cvm.saltbox.dev/version?url=
+cvm: https://cvm.bizbox.dev/version?url=
 
 ################################
 # Global Variables

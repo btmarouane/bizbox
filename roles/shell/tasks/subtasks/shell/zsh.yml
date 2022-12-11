@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Shell | ZSH Tasks                             #
+# Title:         Bizbox: Shell | ZSH Tasks                             #
 # Author(s):     desimaniac                                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -41,7 +41,7 @@
 - name: ZSH | Add items to '{{ shell_zsh_zshrc_path }}'
   ansible.builtin.blockinfile:
     path: "{{ shell_zsh_zshrc_path }}"
-    marker: "### SALTBOX MANAGED BLOCK 1 - {mark} ###"
+    marker: "### BIZBOX MANAGED BLOCK 1 - {mark} ###"
     block: "{{ shell_zsh_zshrc_block_content1 }}"
     insertbefore: BOF
     state: present
@@ -53,7 +53,7 @@
 - name: ZSH | Add items to '{{ shell_zsh_zshrc_path }}'
   ansible.builtin.blockinfile:
     path: "{{ shell_zsh_zshrc_path }}"
-    marker: "### SALTBOX MANAGED BLOCK 2 - {mark} ###"
+    marker: "### BIZBOX MANAGED BLOCK 2 - {mark} ###"
     block: "{{ shell_zsh_zshrc_block_content2 }}"
     state: present
     create: false
@@ -64,7 +64,7 @@
 - name: ZSH | Add custom items to '{{ shell_zsh_zshrc_path }}'
   ansible.builtin.blockinfile:
     path: "{{ shell_zsh_zshrc_path }}"
-    marker: "### SALTBOX MANAGED BLOCK CUSTOM - {mark} ###"
+    marker: "### BIZBOX MANAGED BLOCK CUSTOM - {mark} ###"
     block: "{{ shell_zsh_zshrc_block_custom }}"
     state: present
     create: false

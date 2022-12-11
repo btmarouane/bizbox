@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Sanity Check | Ansible Version                #
+# Title:         Bizbox: Sanity Check | Ansible Version                #
 # Author(s):     desimaniac, salty                                      #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -24,7 +24,7 @@
 
 - name: "Upgrade Ansible -- DO NOT CANCEL"
   ansible.builtin.script:
-    cmd: /srv/git/saltbox/scripts/update.sh
+    cmd: /srv/git/bizbox/scripts/update.sh
   become: true
   become_user: root
   when: ansible_update
@@ -34,7 +34,7 @@
 
     - name: "Upgrade Ansible | Chown update log file"
       ansible.builtin.file:
-        path: "/srv/git/saltbox/ansible-update.log"
+        path: "/srv/git/bizbox/ansible-update.log"
         owner: "{{ user.name }}"
         group: "{{ user.name }}"
         mode: '0664'

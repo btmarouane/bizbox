@@ -2,7 +2,7 @@
 
 # https://github.com/mtecer/terraform/blob/master/bmc/files/ansible/custom.fact
 
-RES=$(curl -s -w "%{http_code}" --connect-timeout 2.37 -4 https://ipify.saltbox.dev)
+RES=$(curl -s -w "%{http_code}" --connect-timeout 2.37 -4 https://ipify.bizbox.dev)
 BODY=${RES::-3}
 STATUS=$(printf "%s" "$RES" | tail -c 3)
 if [[ "$STATUS" == 200 ]] && [ -n "${BODY-unset}" ]; then
@@ -13,7 +13,7 @@ else
     PUBLIC_IP=$(curl --connect-timeout 2.37 -s -4 https://ipv4.icanhazip.com)
 fi
 
-RES6=$(curl -s -w "%{http_code}" --connect-timeout 2.37 -6 https://ipify6.saltbox.dev)
+RES6=$(curl -s -w "%{http_code}" --connect-timeout 2.37 -6 https://ipify6.bizbox.dev)
 BODY6=${RES6::-3}
 STATUS6=$(printf "%s" "$RES6" | tail -c 3)
 if [[ "$STATUS6" == 200 ]] && [ -n "${BODY6-unset}" ]; then

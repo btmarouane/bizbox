@@ -1,7 +1,7 @@
 ########################################################################################
-# Title:         Saltbox: Settings | Migrator | 'ansible.cfg' | Migration 01           #
+# Title:         Bizbox: Settings | Migrator | 'ansible.cfg' | Migration 01           #
 # Author(s):     desimaniac                                                            #
-# URL:           https://github.com/saltyorg/Saltbox                                   #
+# URL:           https://github.com/jeremiahg7/Bizbox                                   #
 # --                                                                                   #
 ########################################################################################
 #                            GNU General Public License v3.0                           #
@@ -15,15 +15,15 @@
     value: "{{ item.value | default(omit) }}"
     state: "{{ item.state | default('present') }}"
     no_extra_spaces: false
-    owner: "{{ saltbox_yml.stat.uid }}"
-    group: "{{ saltbox_yml.stat.gid }}"
+    owner: "{{ bizbox_yml.stat.uid }}"
+    group: "{{ bizbox_yml.stat.gid }}"
     mode: 0664
   register: ansible_cfg_update_status
   loop:
     - { section: 'defaults', option: 'inventory', value: './inventories/local' }
     - { section: 'defaults', option: 'roles_path', value: 'roles:resources/roles' }
     - { section: 'defaults', option: 'fact_path', value: './ansible_facts.d' }
-    - { section: 'defaults', option: 'log_path', value: './saltbox.log' }
+    - { section: 'defaults', option: 'log_path', value: './bizbox.log' }
     - { section: 'defaults', option: 'callbacks_enabled', value: 'profile_tasks' }
     - { section: 'defaults', option: 'interpreter_python', value: '/usr/bin/python3' }
     - { section: 'defaults', option: 'remote_tmp', value: '/tmp/ansible' }

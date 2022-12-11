@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Plex Auth Token Role                          #
+# Title:         Bizbox: Plex Auth Token Role                          #
 # Author(s):     EnorMOZ, Desimaniac, salty                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -13,7 +13,7 @@
 
 - name: "Auth Token | Create directories"
   ansible.builtin.file:
-    path: "/opt/saltbox"
+    path: "/opt/bizbox"
     state: directory
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
@@ -21,14 +21,14 @@
 
 - name: "Auth Token | Check if PIN exists"
   ansible.builtin.stat:
-    path: "/opt/saltbox/plex.ini"
+    path: "/opt/bizbox/plex.ini"
   register: plex_ini
 
 - name: "Auth Token | plex_auth_client_identifier"
   block:
     - name: "Auth Token | Lookup plex_auth_client_identifier"
       ansible.builtin.set_fact:
-        plex_auth_client_identifier: "Saltbox{{ lookup('ini', 'client_identifier section=' + plex_name + ' file=/opt/saltbox/plex.ini') }}"
+        plex_auth_client_identifier: "Bizbox{{ lookup('ini', 'client_identifier section=' + plex_name + ' file=/opt/bizbox/plex.ini') }}"
         plex_auth_client_identifier_missing: false
 
   rescue:
@@ -41,12 +41,12 @@
 
 - name: "Auth Token | Generate new plex_auth_client_identifier"
   ansible.builtin.set_fact:
-    plex_auth_client_identifier: "Saltbox{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=8') }}"
+    plex_auth_client_identifier: "Bizbox{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=8') }}"
   when: (not plex_ini.stat.exists) or plex_auth_client_identifier_missing
 
 - name: "Auth Token | Set plex_auth_token variable if previously saved"
   ansible.builtin.set_fact:
-    plex_auth_token: "{{ lookup('ini', 'token section=' + plex_name + ' file=/opt/saltbox/plex.ini') | regex_replace('\n', '') }}"
+    plex_auth_token: "{{ lookup('ini', 'token section=' + plex_name + ' file=/opt/bizbox/plex.ini') | regex_replace('\n', '') }}"
   when: plex_ini.stat.exists and not plex_auth_client_identifier_missing
 
 - name: "Auth Token | Set plex_no_token status"
@@ -59,7 +59,7 @@
     method: GET
     return_content: yes
     body:
-      X-Plex-Token: "{{ lookup('ini', 'token section=' + plex_name + ' file=/opt/saltbox/plex.ini') }}"
+      X-Plex-Token: "{{ lookup('ini', 'token section=' + plex_name + ' file=/opt/bizbox/plex.ini') }}"
       X-Plex-Version: "{{ plex_auth_token_version }}"
       X-Plex-Product: "{{ plex_auth_token_product }}"
       X-Plex-Client-Identifier: "{{ plex_auth_client_identifier }}"
@@ -108,9 +108,9 @@
             status_code: 200
           register: plex_token_new
 
-        - name: "Auth Token | Add Client Identifier to '/opt/saltbox/plex.ini'"
+        - name: "Auth Token | Add Client Identifier to '/opt/bizbox/plex.ini'"
           community.general.ini_file:
-            path: /opt/saltbox/plex.ini
+            path: /opt/bizbox/plex.ini
             section: "{{ plex_name }}"
             option: client_identifier
             value: "{{ plex_auth_client_identifier }}"
@@ -118,9 +118,9 @@
             group: "{{ user.name }}"
             mode: "0664"
 
-        - name: "Auth Token | Add Plex Token to '/opt/saltbox/plex.ini'"
+        - name: "Auth Token | Add Plex Token to '/opt/bizbox/plex.ini'"
           community.general.ini_file:
-            path: /opt/saltbox/plex.ini
+            path: /opt/bizbox/plex.ini
             section: "{{ plex_name }}"
             option: token
             value: "{{ plex_token_new.json.authToken }}"
@@ -163,7 +163,7 @@
 
 - name: Change permissions
   ansible.builtin.file:
-    path: /opt/saltbox
+    path: /opt/bizbox
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
     mode: '0755'

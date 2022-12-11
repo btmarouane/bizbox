@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: System | Logrotate Tasks                      #
+# Title:         Bizbox: System | Logrotate Tasks                      #
 # Author(s):     desimaniac, salty                                      #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -26,12 +26,12 @@
 - name: Logrotate | Create 'logrotate_d_items' variable
   ansible.builtin.set_fact:
     logrotate_d_items:
-      - path: "saltbox"
+      - path: "bizbox"
         content: |
-          /srv/git/saltbox/saltbox.log {
+          /srv/git/bizbox/bizbox.log {
               weekly
               rotate 5
-              size {{ saltbox_max_log_size }}
+              size {{ bizbox_max_log_size }}
               missingok
               notifempty
               create 644 {{ user.name }} {{ user.name }}
@@ -41,17 +41,17 @@
           /opt/sandbox/sandbox.log {
               weekly
               rotate 5
-              size {{ saltbox_max_log_size }}
+              size {{ bizbox_max_log_size }}
               missingok
               notifempty
               create 644 {{ user.name }} {{ user.name }}
           }
-      - path: "saltbox_mod"
+      - path: "bizbox_mod"
         content: |
-          /opt/saltbox_mod/saltbox_mod.log {
+          /opt/bizbox_mod/bizbox_mod.log {
               weekly
               rotate 5
-              size {{ saltbox_max_log_size }}
+              size {{ bizbox_max_log_size }}
               missingok
               notifempty
               create 644 {{ user.name }} {{ user.name }}
@@ -72,7 +72,7 @@
 - name: Logrotate | Add items to '/etc/logrotate.d'
   ansible.builtin.blockinfile:
     path: "/etc/logrotate.d/{{ item.path }}"
-    marker: "### SALTBOX MANAGED BLOCK - {mark} ###"
+    marker: "### BIZBOX MANAGED BLOCK - {mark} ###"
     block: "{{ item.content }}"
     create: true
     mode: "0644"

@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Backup Role                                   #
+# Title:         Bizbox: Backup Role                                   #
 # Author(s):     l3uddz, desimaniac, RXWatcher1                         #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -17,7 +17,7 @@
       tags:
         - set-backup
         - restore-service
-        - saltbox-restore-service
+        - bizbox-restore-service
 
     - name: Cron
       ansible.builtin.import_tasks: "cron.yml"
@@ -35,11 +35,11 @@
     - name: Snapshot
       ansible.builtin.import_tasks: "snapshot.yml"
 
-    - name: "Notify | Saltbox Backup: Started Saltbox backup task"
+    - name: "Notify | Bizbox Backup: Started Bizbox backup task"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Started {{ use_snapshot | ternary('(snapshot-enabled) ', '') }}backup task."
+        message: "Bizbox Backup: Started {{ use_snapshot | ternary('(snapshot-enabled) ', '') }}backup task."
 
     - name: "Create 'backup.lock'."
       ansible.builtin.file:
@@ -107,11 +107,11 @@
       ansible.builtin.set_fact:
         backup_enough_disk_space: "{{ (local_backup_destination_free_space.stdout | int) > (estimated_backup_size.stdout.split()[0] | int) }}"
 
-    - name: "Notify | Saltbox Backup: Started Saltbox backup task"
+    - name: "Notify | Bizbox Backup: Started Bizbox backup task"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Not enough disk space. Aborting."
+        message: "Bizbox Backup: Not enough disk space. Aborting."
       when: (not backup_enough_disk_space)
 
     - name: "Fail when not enough disk space"
@@ -166,7 +166,7 @@
       when: (backup_user_defined_files | length > 0)
 
     # Backup the excludes list if it exists
-    - name: "Look for 'backup_excludes_list.txt' file in saltbox folder"
+    - name: "Look for 'backup_excludes_list.txt' file in bizbox folder"
       ansible.builtin.stat:
         path: "{{ playbook_dir }}/backup_excludes_list.txt"
       register: backup_excludes_list
@@ -188,12 +188,12 @@
           if ((backup_excludes_list is defined) and (backup_excludes_list.stat.exists))
           else (playbook_dir + '/roles/backup/files/backup_excludes_list.txt') }}"
 
-    - name: saltbox Restore Service
+    - name: bizbox Restore Service
       ansible.builtin.import_tasks: "restore_service.yml"
       when: restore_service_enabled
       tags:
         - restore-service
-        - saltbox-restore-service
+        - bizbox-restore-service
 
     - name: "Synchronize '/etc/systemd/system' to '/opt/systemd-backup' for inclusion in backup"
       ansible.builtin.shell: |
@@ -232,7 +232,7 @@
     # Stop Containers
 
     - name: "Gather list of running Docker containers"
-      ansible.builtin.shell: "docker ps --format '{{ '{{' }} .Names{{ '}}' }}' --filter label=com.github.saltbox.saltbox_managed=true | xargs echo -n"
+      ansible.builtin.shell: "docker ps --format '{{ '{{' }} .Names{{ '}}' }}' --filter label=com.github.bizbox.bizbox_managed=true | xargs echo -n"
       register: docker_containers
       ignore_errors: true
 
@@ -259,11 +259,11 @@
           ansible.builtin.shell: "docker stop {{ docker_containers }}"
           ignore_errors: true
 
-        - name: "Notify | Saltbox Backup: Stopped Docker containers"
+        - name: "Notify | Bizbox Backup: Stopped Docker containers"
           ansible.builtin.include_role:
             name: notify
           vars:
-            message: "Saltbox Backup: Stopped Docker containers."
+            message: "Bizbox Backup: Stopped Docker containers."
 
       when: (docker_containers | trim | length > 0)
 
@@ -331,11 +331,11 @@
           ignore_errors: true
           when: (docker_containers | trim | length > 0)
 
-        - name: "Snapshot | Notify | Saltbox Backup: Started Docker containers"
+        - name: "Snapshot | Notify | Bizbox Backup: Started Docker containers"
           ansible.builtin.include_role:
             name: notify
           vars:
-            message: "Saltbox Backup: Started Docker containers."
+            message: "Bizbox Backup: Started Docker containers."
           when: (docker_containers | trim | length > 0)
 
       when: (use_snapshot)
@@ -431,11 +431,11 @@
       ansible.builtin.set_fact:
         backup_size: "{{ (backup_new.stdout | int) | filesizeformat }}"
 
-    - name: "Notify | Saltbox Backup: Backup created with total size of {{ backup_size }}."
+    - name: "Notify | Bizbox Backup: Backup created with total size of {{ backup_size }}."
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Backup created with total size of {{ backup_size }}."
+        message: "Bizbox Backup: Backup created with total size of {{ backup_size }}."
       ignore_errors: true
 
     # Start Docker containers when snapshot is not enabled
@@ -452,11 +452,11 @@
           ignore_errors: true
           when: (docker_containers | trim | length > 0)
 
-        - name: "Notify | Saltbox Backup: Started Docker containers"
+        - name: "Notify | Bizbox Backup: Started Docker containers"
           ansible.builtin.include_role:
             name: notify
           vars:
-            message: "Saltbox Backup: Started Docker containers."
+            message: "Bizbox Backup: Started Docker containers."
           when: (docker_containers | trim | length > 0)
 
       when: (not use_snapshot)
@@ -538,11 +538,11 @@
       become_user: "{{ user.name }}"
       when: (backup.rclone.enable)
 
-    - name: "Notify | Saltbox Backup: Rclone uploaded backup to '{{ backup.rclone.destination }}'"
+    - name: "Notify | Bizbox Backup: Rclone uploaded backup to '{{ backup.rclone.destination }}'"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Rclone uploaded backup to '{{ backup.rclone.destination }}'."
+        message: "Bizbox Backup: Rclone uploaded backup to '{{ backup.rclone.destination }}'."
       when: (backup.rclone.enable)
 
     - name: "Use rsync to upload backup to '{{ backup.rsync.destination }}'"
@@ -556,11 +556,11 @@
       become_user: "{{ user.name }}"
       when: (backup.rsync.enable)
 
-    - name: "Notify | Saltbox Backup: Rsync uploaded backup to '{{ backup.rsync.destination }}'"
+    - name: "Notify | Bizbox Backup: Rsync uploaded backup to '{{ backup.rsync.destination }}'"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Rsync uploaded backup to '{{ backup.rsync.destination }}'."
+        message: "Bizbox Backup: Rsync uploaded backup to '{{ backup.rsync.destination }}'."
       when: (backup.rsync.enable)
 
     - name: Get Current Time
@@ -575,11 +575,11 @@
       ansible.builtin.set_fact:
         total_time: "{{ (((end_time | int) - (start_time | int)) / 60) | int | abs }}"
 
-    - name: "Notify | Saltbox Backup: Finished Saltbox backup task in {{ total_time }} minutes"
+    - name: "Notify | Bizbox Backup: Finished Bizbox backup task in {{ total_time }} minutes"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Finished Saltbox {{ use_snapshot | ternary('(snapshot-enabled) ', '') }}backup task in {{ total_time }} minutes."
+        message: "Bizbox Backup: Finished Bizbox {{ use_snapshot | ternary('(snapshot-enabled) ', '') }}backup task in {{ total_time }} minutes."
 
     - name: "Start 'cloudplow' service"
       ansible.builtin.systemd:
@@ -654,11 +654,11 @@
       ansible.builtin.debug:
         msg: 'Backup terminated due to an error'
 
-    - name: "Notify | Saltbox Backup: Backup terminated due to an error"
+    - name: "Notify | Bizbox Backup: Backup terminated due to an error"
       ansible.builtin.include_role:
         name: notify
       vars:
-        message: "Saltbox Backup: Backup terminated due to an error."
+        message: "Bizbox Backup: Backup terminated due to an error."
 
   always:
     - name: "Remove 'backup.lock'"

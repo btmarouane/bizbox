@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: MOTD Role                                     #
+# Title:         Bizbox: MOTD Role                                     #
 # Author(s):     l3uddz, desimaniac                                     #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -79,9 +79,9 @@
     state: directory
     mode: 0775
 
-- name: Clone Saltbox MOTD
+- name: Clone Bizbox MOTD
   ansible.builtin.git:
-    repo: https://github.com/saltyorg/motd.git
+    repo: https://github.com/jeremiahg7/motd.git
     dest: /opt/motd
     clone: true
     version: HEAD
@@ -118,7 +118,7 @@
 
     - name: Migrate value of motd banner
       ansible.builtin.shell: |
-        jq '.motd.banner_title = "Saltbox"' /opt/motd/config.json|sponge /opt/motd/config.json
+        jq '.motd.banner_title = "Bizbox"' /opt/motd/config.json|sponge /opt/motd/config.json
       when: motd_banner.stdout == '"Cloudbox"'
 
   when: motd_config.stat.exists
@@ -145,9 +145,9 @@
     group: "{{ user.name }}"
     mode: 0775
 
-- name: Set 'saltbox-motd.py' as executable
+- name: Set 'bizbox-motd.py' as executable
   ansible.builtin.file:
-    path: /opt/motd/saltbox-motd.py
+    path: /opt/motd/bizbox-motd.py
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
     mode: a+x

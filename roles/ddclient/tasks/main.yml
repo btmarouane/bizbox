@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: DDClient Role                                 #
+# Title:         Bizbox: DDClient Role                                 #
 # Author(s):     desimaniac                                             #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # Docker Image:  linuxserver/ddclient                                   #
 # --                                                                    #
 #########################################################################
@@ -64,9 +64,9 @@
     volumes:
       - "/opt/ddclient:/config"
     labels:
-      "com.github.saltbox.saltbox_managed": "true"
+      "com.github.bizbox.bizbox_managed": "true"
     networks:
-      - name: saltbox
+      - name: bizbox
         aliases:
           - ddclient
     networks_cli_compatible: true

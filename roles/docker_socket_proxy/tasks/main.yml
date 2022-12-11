@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Docker Socket Proxy Role                      #
+# Title:         Bizbox: Docker Socket Proxy Role                      #
 # Author(s):     salty                                                  #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -25,11 +25,11 @@
       CONTAINERS: "1"
       IMAGES: "1"
     networks:
-      - name: saltbox
+      - name: bizbox
         aliases:
           - docker-socket-proxy
     labels:
-      "com.github.saltbox.saltbox_managed": "true"
+      "com.github.bizbox.bizbox_managed": "true"
     networks_cli_compatible: true
     network_mode: "{{ docker_networks_name_common }}"
     container_default_behavior: compatibility

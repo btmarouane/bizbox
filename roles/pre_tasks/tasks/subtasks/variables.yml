@@ -1,19 +1,19 @@
 #########################################################################
 # Title:         Pre-Tasks: Variables Tasks                             #
 # Author(s):     salty                                                  #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
 #########################################################################
 ---
-- name: Find Saltbox roles
-  ansible.builtin.shell: "find /srv/git/saltbox/roles -type d -name 'defaults'"
-  register: saltbox_roles
+- name: Find Bizbox roles
+  ansible.builtin.shell: "find /srv/git/bizbox/roles -type d -name 'defaults'"
+  register: bizbox_roles
 
-- name: Include Saltbox role default vars
+- name: Include Bizbox role default vars
   ansible.builtin.include_vars: "{{ item }}/main.yml"
-  with_items: "{{ saltbox_roles.stdout_lines }}"
+  with_items: "{{ bizbox_roles.stdout_lines }}"
 
 - name: Sandbox
   block:
@@ -25,14 +25,14 @@
     - name: Include Sandbox role default vars
       ansible.builtin.include_vars: "{{ item }}/main.yml"
       with_items: "{{ sandbox_roles.stdout_lines }}"
-  when: (playbook_dir == "/opt/saltbox_mod")
+  when: (playbook_dir == "/opt/bizbox_mod")
 
 - name: Check if 'localhost.yml' exists
   ansible.builtin.stat:
-    path: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+    path: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
   register: localhost_inventory_file
 
 - name: Import Inventory variables
-  ansible.builtin.include_vars: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+  ansible.builtin.include_vars: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
   when: localhost_inventory_file.stat.exists
 

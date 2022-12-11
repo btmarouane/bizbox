@@ -1,7 +1,7 @@
 #########################################################################
-# Title:         Saltbox: Common Role                                   #
+# Title:         Bizbox: Common Role                                   #
 # Author(s):     l3uddz, desimaniac, salty                              #
-# URL:           https://github.com/saltyorg/Saltbox                    #
+# URL:           https://github.com/jeremiahg7/Bizbox                    #
 # --                                                                    #
 #########################################################################
 #                   GNU General Public License v3.0                     #
@@ -36,13 +36,13 @@
 
 - name: Check if 'localhost.yml' exists
   ansible.builtin.stat:
-    path: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+    path: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
   register: localhost_yml
 
 - name: "Import 'localhost.yml'"
   ansible.builtin.copy:
     src: "localhost.yml"
-    dest: "/srv/git/saltbox/inventories/host_vars/localhost.yml"
+    dest: "/srv/git/bizbox/inventories/host_vars/localhost.yml"
     owner: "{{ user.name }}"
     group: "{{ user.name }}"
     mode: 0775
