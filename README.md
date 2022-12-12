@@ -21,3 +21,5 @@ sb install preinstall
 ```
 
 If your server did not need to reboot you can run su username to switch user or reconnect to SSH as the newly created user. Everything after this point will assume you are running as the user entered in accounts.yml
+
+### [Install sandbox apps](https://github.com/jeremiahg7/Sandbox/)
