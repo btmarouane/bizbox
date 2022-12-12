@@ -2,30 +2,11 @@
 
 This project was designed for x64 machines running Ubuntu Server 20.04 or 22.04. 
 
-### Featured Applications
+Before installling Bizbox or sandbox apps you need to follow these steps :
 
-- Plex
-- Emby
-- Sonarr
-- Radarr
-- Lidarr
-- Rclone
-- NZBGet
-- ruTorrent
-- Tautulli
-- NZBHydra2
-- Jackett
-- Overseer
-- Plex Autoscan
-- Cloudplow
-- Organizr
-- Portainer
-- Traktarr
-- Plex Dupefinder
-- Plex Patrol
-- and more...
 
 ### Bizbox preinstall
+
 
 Edit accounts.yml file to specify user and password
 
