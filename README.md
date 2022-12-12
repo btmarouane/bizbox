@@ -4,6 +4,9 @@ This project was designed for x64 machines running Ubuntu Server 20.04 or 22.04.
 
 Before installling Bizbox or sandbox apps you need to follow these steps :
 
+### Requirements
+
+- [Sb](https://github.com/jeremiahg7/Sb/)
 
 ### Bizbox preinstall
 
