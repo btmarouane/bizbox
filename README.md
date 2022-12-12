@@ -10,7 +10,7 @@ Before installling Bizbox or sandbox apps you need to follow these steps :
 
 ### Bizbox preinstall
 
-This step will create the user account specified in accounts.yml, add it to sudoers, update the kernel, edit GRUB configuration, install Rclone, and reboot the server if needed.
+This step will create the user account specified in accounts.yml (default=saltbox), add it to sudoers, update the kernel, edit GRUB configuration, install Rclone, and reboot the server if needed.
 
 Edit accounts.yml file to specify user and password
 
